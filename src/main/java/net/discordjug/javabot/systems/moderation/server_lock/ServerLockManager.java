@@ -16,6 +16,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.entities.UserSnowflake;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -94,7 +95,7 @@ public class ServerLockManager extends ListenerAdapter {
 				.setColor(Responses.Type.DEFAULT.getColor())
 				.setDescription(String.format("""
 						Unfortunately, this server is currently locked. Please try to join again later.
-						Contact the server owner, %s, for more info.""", guild.getOwner().getAsMention())
+						Contact the server owner, %s, for more info.""", UserSnowflake.fromId(guild.getOwnerIdLong()).getAsMention())
 				).build();
 	}
 
