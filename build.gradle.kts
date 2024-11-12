@@ -107,6 +107,17 @@ checkstyle {
     configDirectory.set(File("checkstyle"))
 }
 
+tasks.withType<Checkstyle>() {
+    exclude("**/generated/**")
+}
+
+tasks.checkstyleAot {
+	isEnabled = false
+}
+tasks.processTestAot {
+	isEnabled = false
+}
+
 graalvmNative {
 	binaries {
 		named("main") {
