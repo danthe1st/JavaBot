@@ -71,7 +71,7 @@ public class SpringConfig {
 		return JDABuilder.createDefault(botConfig.getSystems().getJdaBotToken())
 			.setStatus(OnlineStatus.DO_NOT_DISTURB)
 			.setChunkingFilter(ChunkingFilter.ALL)
-			.setMemberCachePolicy(MemberCachePolicy.ALL)
+			.setMemberCachePolicy(MemberCachePolicy.NONE)
 			.enableCache(CacheFlag.ACTIVITY)
 			.enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
 			.addEventListeners(listeners.toArray())
