@@ -2,6 +2,7 @@ package net.discordjug.javabot;
 
 import java.nio.channels.Channel;
 
+import club.minnced.discord.webhook.send.WebhookEmbed;
 import net.discordjug.javabot.data.config.BotConfig;
 import net.discordjug.javabot.data.config.GuildConfig;
 import net.discordjug.javabot.data.config.GuildConfigItem;
@@ -48,7 +49,9 @@ import org.springframework.core.io.ClassPathResource;
 		//ensure JDA can create necessary caches
 		User[].class, Guild[].class, Member[].class, Role[].class, Channel[].class, AudioManager[].class, ScheduledEvent[].class, ThreadMember[].class, ForumTag[].class, RichCustomEmoji[].class, GuildSticker[].class, MemberPresenceImpl[].class,
 		//needs to be serialized for channel managers etc
-		PermOverrideData.class
+		PermOverrideData.class,
+		//ensure that webhook embed authors can be serialized
+		WebhookEmbed.EmbedAuthor.class
 	})
 public class RuntimeHintsConfiguration implements RuntimeHintsRegistrar {
 	

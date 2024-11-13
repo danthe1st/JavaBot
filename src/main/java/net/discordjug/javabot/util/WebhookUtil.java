@@ -91,7 +91,13 @@ public class WebhookUtil {
 	 * the message
 	 */
 	public static CompletableFuture<ReadonlyMessage> mirrorMessageToWebhook(@NotNull Webhook webhook, @NotNull Message originalMessage, String newMessageContent, long threadId, @Nullable List<LayoutComponent> components, @Nullable List<MessageEmbed> embeds) {
-		return originalMessage.getGuild().retrieveMember(originalMessage.getAuthor()).submit().thenCompose(member -> mirrorMessageToWebhook(webhook, originalMessage, newMessageContent, threadId, components, embeds, member));
+		return originalMessage
+				.getGuild()
+				.retrieveMember(originalMessage.getAuthor())
+				.submit()
+				.exceptionally(e -> null)//if the member cannot be found, use no member information
+				.thenCompose(member -> 
+					mirrorMessageToWebhook(webhook, originalMessage, newMessageContent, threadId, components, embeds, member));
 	}
 
 	private static CompletableFuture<ReadonlyMessage> mirrorMessageToWebhook(@NotNull Webhook webhook, Message originalMessage, String newMessageContent, long threadId,
