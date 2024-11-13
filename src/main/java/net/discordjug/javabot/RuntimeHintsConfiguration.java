@@ -2,6 +2,7 @@ package net.discordjug.javabot;
 
 import java.nio.channels.Channel;
 
+import lombok.RequiredArgsConstructor;
 import net.discordjug.javabot.data.config.BotConfig;
 import net.discordjug.javabot.data.config.GuildConfig;
 import net.discordjug.javabot.data.config.GuildConfigItem;
@@ -25,6 +26,7 @@ import net.dv8tion.jda.api.entities.sticker.GuildSticker;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.AudioManager;
 import net.dv8tion.jda.internal.entities.MemberPresenceImpl;
+import net.dv8tion.jda.internal.requests.restaction.PermOverrideData;
 import org.h2.server.TcpServer;
 import org.springframework.aot.hint.MemberCategory;
 import org.springframework.aot.hint.RuntimeHints;
@@ -46,10 +48,14 @@ import org.springframework.core.io.ClassPathResource;
 		
 		//ensure JDA can create necessary caches
 		User[].class, Guild[].class, Member[].class, Role[].class, Channel[].class, AudioManager[].class, ScheduledEvent[].class, ThreadMember[].class, ForumTag[].class, RichCustomEmoji[].class, GuildSticker[].class, MemberPresenceImpl[].class,
+		//needs to be serialized for channel managers etc
+		PermOverrideData.class
 	})
 public class RuntimeHintsConfiguration implements RuntimeHintsRegistrar {
+	
 	@Override
 	public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+		
 		//ensure resources are available in native-image
 		hints.resources().registerPattern("assets/**");
 		hints.resources().registerPattern("database/**");
@@ -65,6 +71,5 @@ public class RuntimeHintsConfiguration implements RuntimeHintsRegistrar {
 		
 		// caffeine
 		hints.reflection().registerTypeIfPresent(getClass().getClassLoader(), "com.github.benmanes.caffeine.cache.SSW", MemberCategory.INVOKE_DECLARED_METHODS, MemberCategory.INVOKE_DECLARED_CONSTRUCTORS);
-		
 	}
 }
