@@ -2,7 +2,6 @@ package net.discordjug.javabot;
 
 import java.nio.channels.Channel;
 
-import lombok.RequiredArgsConstructor;
 import net.discordjug.javabot.data.config.BotConfig;
 import net.discordjug.javabot.data.config.GuildConfig;
 import net.discordjug.javabot.data.config.GuildConfigItem;
