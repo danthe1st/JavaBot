@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:latest
 RUN apk add --no-cache libsm libxrender libxext libxtst libxi gcompat ttf-dejavu
 
 COPY build/native/nativeCompile /work
