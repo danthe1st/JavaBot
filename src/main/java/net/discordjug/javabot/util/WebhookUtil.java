@@ -65,8 +65,8 @@ public class WebhookUtil {
 		channel.retrieveWebhooks().queue(webhooks -> {
 			Optional<Webhook> hook = webhooks.stream()
 					.filter(webhook -> webhook.getChannel().getIdLong() == channel.getIdLong())
-					.filter(wh -> wh.getOwner() != null)
-					.filter(wh -> wh.getOwner().getIdLong() == channel.getJDA().getSelfUser().getIdLong())
+					.filter(wh -> wh.getOwnerAsUser() != null)
+					.filter(wh -> wh.getOwnerAsUser().getIdLong() == channel.getJDA().getSelfUser().getIdLong())
 					.filter(wh -> wh.getToken() != null)
 					.findAny();
 			if (hook.isPresent()) {
