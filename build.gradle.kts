@@ -121,8 +121,11 @@ tasks.processTestAot {
 graalvmNative {
 	binaries {
 		named("main") {
-			//For development:
-			//quickBuild.set(true)
+			if (hasProperty("prod")) {
+				buildArgs.add("-O3")
+			} else {
+				quickBuild.set(true)
+			}
 			buildArgs.add("-H:+UnlockExperimentalVMOptions")
 			buildArgs.add("-H:JNIConfigurationFiles=${projectDir}/graal/jni-config.json")
 		}

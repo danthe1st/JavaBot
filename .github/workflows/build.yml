@@ -33,7 +33,7 @@ jobs:
           java-version: '21'
           distribution: 'graalvm-community'
       - name: Build JAR
-        run: ./gradlew nativeCompile
+        run: ./gradlew nativeCompile -Pprod
       - name: Build Docker image
         run: docker build -t javabot .
       - name: Tag docker image
