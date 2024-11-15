@@ -126,8 +126,6 @@ graalvmNative {
 			} else {
 				quickBuild.set(true)
 			}
-			buildArgs.add("-H:+UnlockExperimentalVMOptions")
-			buildArgs.add("-H:JNIConfigurationFiles=${projectDir}/graal/jni-config.json")
 		}
 	}
 }
